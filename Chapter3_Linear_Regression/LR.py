@@ -35,6 +35,6 @@ for i in range(num_epoch):
 
     param_list = list(model.parameters())
     #print(param_list[0].item(), param_list[1].item())
-
+plt.plot(x, y)
 plt.plot(param_list)
 plt.savefig('LR')
