@@ -24,4 +24,31 @@ y = (x**2) + 3
 # pytorch의 브로드캐스팅 기능으로 인해 각 행 + y가 된다.
 y_noise = y + noise # 결과는 기존의 y와 같다.
 
-print(y_noise)
+model = nn.Sequential(
+        nn.Linear(1, 6),
+        nn.ReLU(),
+        nn.Linear(6, 10),
+        nn.ReLU(),
+        nn.Linear(10, 6),
+        nn.ReLU(),
+        nn.Linear(6, 1),
+        )
+
+loss_func = nn.L1Loss()
+optimizer = optim.SGD(model.parameters(), lr= 0.0002)
+
+loss_array = []
+
+for i in range(num_epoch):
+    optimizer.zero_grad()
+    output = model(x)
+    loss = loss_func(output, y_noise)
+    loss.backward()
+    optimizer.step()
+
+    loss_array.append(loss)
+
+import matplotlib.pyplot as plt
+
+plt.plot(loss_array)
+plt.savefig("loss_array.png")
