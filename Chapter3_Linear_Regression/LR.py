@@ -2,6 +2,8 @@ import torch
 import torch.nn as nn
 import torch.optim as optim
 import torch.nn.init as init
+import matplotlib.pyplot as plt
+#%matplotlib inline
 
 num_data = 1000
 num_epoch = 500
@@ -33,3 +35,6 @@ for i in range(num_epoch):
 
     param_list = list(model.parameters())
     #print(param_list[0].item(), param_list[1].item())
+
+plt.plot(param_list)
+plt.savefig('LR')
